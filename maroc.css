@@ -6,9 +6,14 @@ body{
     align-items: center;
     padding: 30px;
 }
+body h1{
+    font-size: 50px;
+    color: red;
+    text-decoration:underline;
+}
 .map{
     position: relative;
-    width: 800px;
+    width: 600px;
     height: auto;
 }
 .map img {
@@ -42,4 +47,16 @@ body{
 }
 .agadir { 
     top: 40%; left: 40%;
+}
+.berkane { 
+    top: 8%; left: 80%;
+}
+.ouajda{
+    top: 12%; left: 80%;
+}
+.fes{
+    top: 17%; left: 65%;
+}
+.oued_zem{
+    top: 23%; left: 55%;
 }
