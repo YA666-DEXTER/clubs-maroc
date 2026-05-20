@@ -1,66 +1,124 @@
-body{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: grey;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px;
-}
-body h1{
-    font-size: 50px;
-    color: rgba(5, 4, 4, 0.929);
-    text-decoration:underline;
-}
-.map{
-    position: relative;
-    width: 600px;
-    height: auto;
-}
-.map img {
-    display: block;
-    width: 100%;
-    height: 600px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px greenyellow;
-}
-.city a{
-    position: absolute;
-    background: rgba(255, 255, 255, 0.511);
-    font-size: 15px;
-    padding: 2px 10px;
-    border-radius: 4px;
-    color: green;
-    text-decoration: none;
-    border: 1px solid rebeccapurple;
+/* إعدادات عامة للصفحة */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    direction: rtl; /* توجيه الموقع من اليمين لليسار لدعم العربية */
 }
 
-.tanger { 
-    top: 5%; left: 60%; 
+/* الحاوية الرئيسية لترتيب العناصر بجانب بعضها */
+.site-container {
+    display: flex;
+    height: 100vh; /* ملء الشاشة بالكامل عمودياً */
+    width: 100%;
+    box-sizing: border-box;
 }
-.rabat { 
-    top: 15%; left: 55%;
+
+/* 1. تنسيق إطار الخريطة الكبير */
+.map-frame {
+    flex: 3; /* يأخذ 75% من عرض الشاشة */
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-left: 2px solid #e2e8f0; /* خط فاصل خفيف بين الإطارين */
 }
-.Casablanca {
-    top: 20%; left: 45%; 
+
+.map-wrapper {
+    width: 100%;
+    height: 100%;
+    max-width: 900px;
+    max-height: 700px;
+    border: 2px dashed #cbd5e1; /* إطار رمادي منقط لتمييز منطقة الخريطة */
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px;
+    box-sizing: border-box;
+    background-color: #f8fafc;
 }
-.Marrakech { 
-    top: 30%; left: 45%;
+
+.svg-map {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* يحافظ على أبعاد الخريطة دون أن تتشوه */
+  
 }
-.agadir { 
-    top: 40%; left: 40%;
+
+/* 2. تنسيق الإطار الجانبي المستطيل العمودي */
+.sidebar-frame {
+    flex: 1; /* يأخذ 25% المتبقية من عرض الشاشة */
+    min-width: 320px; /* ضمان عدم صغر القائمة في الشاشات المتوسطة */
+    background-color: #ffffff;
+    padding: 25px 20px;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.05); /* ظل ناعم خلف القائمة */
+    overflow-y: auto; /* يظهر شريط تمرير عمودي إذا زادت المدن عن حجم الشاشة */
 }
-.berkane { 
-    top: 8%; left: 80%;
+
+.sidebar-frame h2 {
+    font-size: 1.4rem;
+    color: #1e293b;
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #3b82f6; /* خط أزرق تحت العنوان الرئيسي */
 }
-.ouajda{
-    top: 12%; left: 80%;
+
+/* تنسيق كتل المدن */
+.city-box {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 20px;
 }
-.fes{
-    top: 17%; left: 65%;
+
+.city-name {
+    margin-top: 0;
+    margin-bottom: 12px;
+    color: #1e3a8a; /* لون أزرق غامق لاسم المدينة */
+    font-size: 1.15rem;
+    border-right: 4px solid #3b82f6; /* خط أزرق عمودي جمالي يمين اسم المدينة */
+    padding-right: 8px;
 }
-.oued_zem{
-    top: 23%; left: 55%;
+
+/* تنسيق قائمة الفرق */
+.teams-list {
+    list-style: none; /* إخفاء النقاط التلقائية للقائمة */
+    padding: 0;
+    margin: 0;
 }
-.safi{
-    top: 25%; left: 45%;
+
+.team-item {
+    display: flex;
+    align-items: center; /* محاذاة اللوغو والنص عمودياً في نفس السطر */
+    padding: 10px 0;
+    border-bottom: 1px solid #edf2f7; /* خط فاصل خفيف بين الفرق */
+}
+
+/* إزالة الخط الفاصل من الفرقة الأخيرة في المدينة */
+.team-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+/* تنسيق لوغو الفرقة */
+.team-logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; /* جعل اللوغو دائرياً */
+    background-color: #e2e8f0; /* لون خلفية احتياطي رمادي في حال لم تتوفر الصورة */
+    margin-left: 12px; /* مسافة بين اللوغو واسم الفرقة */
+    object-fit: cover;
+    border: 1px solid #cbd5e1;
+}
+
+/* تنسيق اسم الفرقة */
+.team-title {
+    font-size: 0.95rem;
+    color: #475569;
+    font-weight: 500;
 }
